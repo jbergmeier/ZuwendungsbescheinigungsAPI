@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 require('dotenv').config()
 const fetch = require("node-fetch")
 
+const {genHtml} = require("./functionHTML")
+
 const PORT = process.env.PORT || 3000
 const event = new Date()
 const options = { year: 'numeric', month: 'numeric', day: 'numeric' }; // weekday: 'long'
@@ -37,7 +39,7 @@ app.post('/api/v3/de/generate', (req, resp, next) => {
             // Request Modifications for futher calc and res
             responseBody.requestfullAmount = floorAmount
             responseBody.amountText = res.germanText
-            resp.json(responseBody)
+            resp.send()
         })
         
     }
@@ -71,3 +73,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT,() => {
     console.log(`Server is running on port: ${PORT}`)
 })
+
+console.log(genHtml("hell"))
